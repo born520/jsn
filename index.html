@@ -1,1 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <title>송은영 양산시의원 의정보고서</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+     
+    body, html { 
+      margin: 0; padding: 0; width: 100%; height: 100%; 
+      background: #f0f2f5; display: flex; justify-content: center; align-items: center; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; overflow: hidden;
+    }
+    .swiper { 
+      width: 100%; height: 100%; max-width: 480px; position: relative; background: #fff; 
+      margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    }
+    .swiper.full-mode { max-width: 100%; box-shadow: none; }
+    .swiper-slide { width: 100%; height: 100%; overflow-y: auto; background: #fff; -webkit-overflow-scrolling: touch; }
+    .content-wrapper { width: 100%; display: flex; flex-direction: column; padding: 0; margin: 0; }
 
+     
+    .image-wrapper { width: 100%; position: relative; background: #000; line-height: 0; }
+    .zoomable-container { width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+    .zoomable-image { max-width: 100%; width: 100%; height: auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; }
+
+     
+    .yt-card, .shorts-card, .local-video-card { width: 100%; margin: 0 0 30px 0; background: #fff; position: relative; overflow: hidden; }
+    .yt-title { padding: 20px 15px; font-size: 19px; font-weight: bold; color: #111; border-left: 6px solid #4285f4; line-height: 1.5; background: #fff; }
+    
+     
+    .video-container, .shorts-container { position: relative; width: 100%; background: #000; }
+    .video-container { padding-bottom: 56.25%; }  
+    .shorts-container { padding-bottom: 177.77%; }  
+    iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 1; }
+
+     
+    .local-video-container { 
+      width: 100%; 
+      background: #000; 
+      line-height: 0; 
+      position: relative; 
+      display: flex;
+      justify-content: center;
+    }
+    .local-video-container video { 
+      width: 100%; 
+      height: auto; 
+      max-height: 85vh;  
+      object-fit: contain; 
+      display: block; 
+    }
+
+     
+    .video-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 50; background: rgba(0,0,0,0.05);
+      display: flex; justify-content: center; align-items: center; cursor: pointer;
+    }
+    .play-btn {
+      width: 70px; height: 70px; background: rgba(255, 255, 255, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .play-btn::after {
+      content: ''; width: 0; height: 0;
+      border-top: 15px solid transparent; border-bottom: 15px solid transparent;
+      border-left: 22px solid #fff; margin-left: 5px;
+    }
+
+     
+    .swiper-button-next, .swiper-button-prev { 
+      color: #4285f4 !important; background: rgba(255,255,255,0.9); 
+      width: 48px; height: 48px; border-radius: 50%; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000 !important;
+    }
+    .swiper-button-disabled { opacity: 0 !important; pointer-events: none; }
+    .yt-script, .text-box { width: 100%; box-sizing: border-box; padding: 30px 20px; font-size: 16.5px; line-height: 1.8; color: #333; white-space: pre-wrap; background: #fff; }
+    .yt-script { background: #f8f9fa; border-top: 1px solid #eee; }
+    
+    #view-toggle-btn { position: fixed; top: 20px; right: 20px; z-index: 2000; width: 50px; height: 50px; background: #4285f4; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+    @media (max-width: 768px) { #view-toggle-btn { display: none !important; } .swiper { max-width: 100% !important; } }
+  </style>
+</head>
+<body>
+
+<div id="view-toggle-btn">🖥️</div>
+
+<div class="swiper" id="mainSwiper">
+  <div class="swiper-wrapper">
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/01.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/02.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/03.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/04.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/05.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/06.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="image-wrapper">
+                <div class="zoomable-container"><img class="zoomable-image" src="https://born520.github.io/jsn/images/07.jpg" loading="lazy"></div>
+              </div>
+            
+                              </div>
+      </div>
+          <div class="swiper-slide">
+        <div class="content-wrapper">
+                                    <div class="yt-title">[5분 자유발언] 종량제 봉투 가격 인하 및 디자인 개선 촉구</div>
+
+                                                <div class="yt-card">
+                <div class="shorts-container">
+                  <iframe class="yt-player" src="https://www.youtube.com/embed/ZmePG8FiFY?enablejsapi=1&amp;rel=0&amp;playsinline=1&amp;modestbranding=1" allow="autoplay"></iframe>
+                  <div class="video-overlay" onclick="handleVideoClick(this)">
+                    <div class="play-btn"></div>
+                  </div>
+                </div>
+              </div>
+
+                              </div>
+      </div>
+      </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  function handleVideoClick(overlay) {
+    overlay.style.display = 'none';
+    const iframe = overlay.parentElement.querySelector('iframe');
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+  }
+
+  const swiper = new Swiper('.swiper', {
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    touchStartPreventDefault: false,
+    on: {
+      slideChange: function () {
+        document.querySelectorAll('.video-overlay').forEach(ov => ov.style.display = 'flex');
+        document.querySelectorAll('.yt-player').forEach(f => {
+          try { f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch(e){}
+        });
+        document.querySelectorAll('video').forEach(v => v.pause());
+        this.slides[this.activeIndex].scrollTop = 0;
+      }
+    }
+  });
+
+  document.getElementById('view-toggle-btn').addEventListener('click', function() {
+    const isFull = document.getElementById('mainSwiper').classList.toggle('full-mode');
+    this.innerText = isFull ? '📱' : '🖥️';
+    setTimeout(() => { swiper.update(); }, 400);
+  });
+
+  class ImageZoom {
+    constructor(container) {
+      this.container = container;
+      this.image = container.querySelector('.zoomable-image');
+      this.scale = 1;
+      this.init();
+    }
+    init() {
+      this.image.addEventListener('dblclick', () => this.toggleZoom());
+      this.container.addEventListener('touchstart', (e) => { if(e.touches.length === 2) swiper.allowTouchMove = false; });
+      this.container.addEventListener('touchend', () => { if(this.scale <= 1) swiper.allowTouchMove = true; });
+    }
+    toggleZoom() {
+      this.scale = (this.scale === 1) ? 2.5 : 1;
+      this.image.style.transform = (this.scale === 2.5) ? `scale(2.5)` : `none`;
+      swiper.allowTouchMove = (this.scale === 1);
+    }
+  }
+  document.querySelectorAll('.zoomable-container').forEach(c => new ImageZoom(c));
+</script>
+</body>
+</html>
