@@ -3,15 +3,17 @@
 <title>Card Gallery</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
 *{box-sizing:border-box;} body,html{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;}
-.swiper{width:100%;height:100%;max-width:100%;margin:0 auto;}
-.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;}
+.swiper{width:100%;height:100%;max-width:480px;margin:0 auto;background:#111;position:relative;}
+.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;}
 .thumb{position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;display:flex;justify-content:center;align-items:center;}
 .thumb img{max-width:100%; max-height:100%; object-fit:contain;}
-.vid-wrap{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;overflow:hidden;}
-video{width:100%;height:100%;object-fit:cover;} .player-wrap{position:absolute;top:0;left:0;width:100%;height:100%;}
+.vid-wrap{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;overflow:hidden;display:flex;justify-content:center;align-items:center;}
+video{width:100%;height:100%;object-fit:cover;background:#000;}
+.player-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:177.78vh;height:100vh;max-width:none;z-index:2;}
+@media (min-width: 480px) { .player-wrap { width: 854px; height: 480px; } }
 .nav-guide{position:absolute; top:50%; width:40px; height:40px; background:rgba(255,255,255,0.1); border-radius:50%; z-index:100; display:flex; justify-content:center; align-items:center; color:#fff; font-size:20px; transition:1s; pointer-events:none;}
 .guide-l{left:10px;} .guide-r{right:10px;} .hide{opacity:0 !important;}
-.sub-box{position:absolute;left:50%;transform:translateX(-50%);bottom:15%;width:90%;text-align:center;color:#fff;z-index:60;background:rgba(0,0,0,0.4);padding:10px;border-radius:8px;opacity:0;transition:0.2s;}
+.sub-box{position:absolute;left:50%;transform:translateX(-50%);bottom:12%;width:90%;text-align:center;color:#fff;z-index:60;background:rgba(0,0,0,0.4);padding:10px;border-radius:8px;opacity:0;transition:0.2s;}
 .sub-box.show{opacity:1;} .top-header{position:absolute;top:40px;left:0;width:100%;color:#fff;text-align:center;z-index:10;font-weight:bold;text-shadow:1px 1px 3px #000;padding:0 20px;}
 .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;z-index:55;background:rgba(0,0,0,0.5);border-radius:50%;display:flex;justify-content:center;align-items:center;}
 .play-btn::after{content:"";width:0;height:0;border-left:25px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:5px;}
@@ -46,9 +48,9 @@ window.onYouTubeIframeAPIReady=function(){ for(var i=0;i<list.length;i++){ if(li
 function onSTCH(e){ var i=parseInt(e.target.getIframe().id.split("-")[1]); if(e.data===1) hideT(i); else if(e.data===2) showB(i); }
 function onSC(){ stopA(); var idx=swiper.activeIndex; if(interacted && list[idx].id) setTimeout(function(){ playV(idx); },300); }
 function hP(i){ interacted=true; playV(i); } function hL(i){ if(!interacted){ interacted=true; if(list[i].id) playV(i); return; } toggle(i); }
-function toggle(i){ if(list[i].isMp4){ var v=document.getElementById("v-"+i); if(v.paused) v.play(); else v.pause(); } else { if(!players[i])return; var p=players[i]; if(p.getPlayerState()===1) p.pauseVideo(); else p.playVideo(); } }
-function playV(i){ if(list[i].isMp4){ var v=document.getElementById("v-"+i); v.currentTime=list[i].ranges[0].s; v.play(); hideT(i); } else { if(!players[i])return; var p=players[i]; p.seekTo(list[i].ranges[0].s,true); p.playVideo(); } }
+function toggle(i){ if(list[i].isMp4){ var v=document.getElementById("v-"+i); v.muted=false; if(v.paused) v.play(); else v.pause(); } else { if(!players[i])return; var p=players[i]; p.unMute(); if(p.getPlayerState()===1) p.pauseVideo(); else p.playVideo(); } }
+function playV(i){ if(list[i].isMp4){ var v=document.getElementById("v-"+i); v.muted=false; v.currentTime=list[i].ranges[0].s; v.play(); hideT(i); } else { if(!players[i])return; var p=players[i]; p.unMute(); p.seekTo(list[i].ranges[0].s,true); p.playVideo(); } }
 function hideT(i){ var b=document.getElementById("b-"+i),t=document.getElementById("t-"+i),s=document.getElementById("s-"+i); if(b)b.style.display="none"; if(t)t.style.display="none"; if(list[i].sub)s.classList.add("show"); }
 function showB(i){ var b=document.getElementById("b-"+i); if(b)b.style.display="flex"; }
-function stopA(){ for(var k in players){ try{players[k].pauseVideo();}catch(e){} } var vs=document.getElementsByTagName("video"); for(var j=0;j<vs.length;j++) vs[j].pause(); }
+function stopA(){ for(var k in players){ try{players[k].pauseVideo();}catch(e){} } var vs=document.getElementsByTagName("video"); for(var j=0;j<vs.length;j++) { vs[j].pause(); vs[j].muted=true; } }
 init();</script></body></html>
