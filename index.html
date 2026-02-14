@@ -1,21 +1,25 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>GAS Shorts Player</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<title>Shorts Player</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
 *{box-sizing:border-box;} body,html{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;}
-.swiper{width:100%;height:100%;max-width:480px;margin:0 auto;}
-.swiper-slide{width:100%;height:100%;position:relative;background:#000;overflow:hidden;}
-.thumb{position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;}
-.thumb img{width:100%;height:100vh;object-fit:cover;}
-.vid-wrap{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;}
-.player-wrap{position:absolute;top:0;left:50%;transform:translateX(-50%);width:177.78vh;height:100%;z-index:2;}
-@media(max-aspect-ratio:9/16){.player-wrap{width:320%;left:-110%;}}
-.sub-box{position:absolute;left:50%;transform:translateX(-50%);bottom:12%;width:90%;text-align:center;color:#fff;z-index:60;background:rgba(0,0,0,0.5);padding:10px;border-radius:8px;opacity:0;transition:0.2s;}
-.sub-box.show{opacity:1;} .top-header{position:absolute;top:50px;left:0;width:100%;color:#fff;text-align:center;z-index:10;font-weight:bold;text-shadow:1px 1px 2px #000;line-height:1.4;}
-.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;z-index:55;background:rgba(0,0,0,0.6);border-radius:50%;display:flex;justify-content:center;align-items:center;}
+.swiper{width:100%;height:100%;max-width:100%;margin:0 auto;}
+.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;}
+.thumb{position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;display:flex;justify-content:center;align-items:center;}
+.thumb img{max-width:100%; max-height:100%; object-fit:contain;}
+.vid-wrap{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;overflow:hidden;}
+.player-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;z-index:2;}
+@media (aspect-ratio: 9/16), (max-aspect-ratio: 9/16) { .player-wrap { width: 177.78vh; height: 100vh; } }
+.nav-btn{position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; background:rgba(255,255,255,0.1); border-radius:50%; z-index:100; display:flex; justify-content:center; align-items:center; color:#fff; opacity:1; transition:opacity 1s; pointer-events:none;}
+.nav-left{left:10px;} .nav-right{right:10px;} .hide-ui{opacity:0 !important;}
+.sub-box{position:absolute;left:50%;transform:translateX(-50%);bottom:15%;width:90%;text-align:center;color:#fff;z-index:60;background:rgba(0,0,0,0.4);padding:10px;border-radius:8px;opacity:0;transition:0.2s;}
+.sub-box.show{opacity:1;} .top-header{position:absolute;top:40px;left:0;width:100%;color:#fff;text-align:center;z-index:10;font-weight:bold;text-shadow:1px 1px 3px #000;padding:0 20px;}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;z-index:55;background:rgba(0,0,0,0.5);border-radius:50%;display:flex;justify-content:center;align-items:center;}
 .play-btn::after{content:"";width:0;height:0;border-left:25px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:5px;}
 .smart-layer{position:absolute;top:0;left:0;width:100%;height:100%;z-index:50;cursor:pointer;}
 </style></head><body>
+<div class="nav-btn nav-left" id="gui-l">〈</div><div class="nav-btn nav-right" id="gui-r">〉</div>
 <div class="swiper"><div class="swiper-wrapper" id="wrap"></div></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
@@ -33,7 +37,8 @@ function init(){
     var hHtml=v.top ? '<div class="top-header">'+v.top+'</div>' : '';
     d.innerHTML=tHtml+pHtml+cHtml+sHtml+hHtml; w.appendChild(d);
   }
-  swiper=new Swiper(".swiper",{direction:"vertical",on:{slideChange:onSC}}); loadYT();
+  swiper=new Swiper(".swiper",{direction:"horizontal",on:{slideChange:onSC}}); loadYT();
+  setTimeout(function(){ document.getElementById("gui-l").classList.add("hide-ui"); document.getElementById("gui-r").classList.add("hide-ui"); }, 3000);
 } function loadYT(){ var t=document.createElement("script"); t.src="https://www.youtube.com/iframe_api"; document.body.appendChild(t); }
 window.onYouTubeIframeAPIReady=function(){ for(var i=0;i<list.length;i++){ if(list[i].id){ players[i]=new YT.Player("p-"+i,{videoId:list[i].id,playerVars:{"controls":0,"modestbranding":1,"playsinline":1,"rel":0},events:{"onStateChange":onSTCH}}); } } };
 function onSTCH(e){ var i=parseInt(e.target.getIframe().id.split("-")[1]); var b=document.getElementById("b-"+i),t=document.getElementById("t-"+i),s=document.getElementById("s-"+i); if(e.data===1){ if(b)b.style.display="none"; if(t)t.style.display="none"; if(list[i].sub)s.classList.add("show"); startM(i); } else if(e.data===2){ if(b)b.style.display="flex"; } }
