@@ -43,7 +43,7 @@ function init(){
     d.innerHTML=tHtml+pHtml+piHtml+cHtml+sHtml+hHtml; w.appendChild(d);
   }
   swiper=new Swiper(".swiper",{direction:"horizontal",on:{slideChange:onSC}}); loadYT();
-  setTimeout(function(){ document.getElementById("gl").classList.add("hide"); document.getElementById("gr").classList.add("hide"); }, 3000);
+  setTimeout(function(){ document.getElementById("gl").classList.add("hide"); document.getElementById("gr").classList.add("hide"); }, 30000);
 } function loadYT(){ var t=document.createElement("script"); t.src="https://www.youtube.com/iframe_api"; document.body.appendChild(t); }
 window.onYouTubeIframeAPIReady=function(){ for(var i=0;i<list.length;i++){ if(list[i].url && !list[i].isMp4){ players[i]=new YT.Player("p-"+i,{videoId:list[i].url,playerVars:{"controls":0,"modestbranding":1,"playsinline":1,"rel":0},events:{"onStateChange":onSTCH}}); } } };
 function onSTCH(e){ var i=parseInt(e.target.getIframe().id.split("-")[1]); if(e.data===1) hideUI(i); else if(e.data===2) showPause(i); else hidePause(i); }
