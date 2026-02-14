@@ -6,10 +6,10 @@
 <title>정숙남의원 의정보고서</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
 *{box-sizing:border-box;} body,html{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;}
-.swiper{width:100%;height:100%;max-width:56.25vh;margin:0 auto;background:#111;position:relative; overflow:hidden;}
-.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;}
-.swiper-zoom-container{width:100%;height:100%;display:flex;justify-content:center;align-items:center; overflow:hidden;}
-.thumb{position:absolute;top:0;left:0;width:100%;height:100%;z-index:30;display:flex;justify-content:center;align-items:center;background:#000;transition:opacity 0.4s; overflow:hidden;}
+.swiper{width:100%;height:100%;max-width:56.25vh;margin:0 auto;background:#111;position:relative; overflow:hidden !important;}
+.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden !important; touch-action:none;}
+.swiper-zoom-container{width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
+.thumb{position:absolute;top:0;left:0;width:100%;height:100%;z-index:30;display:flex;justify-content:center;align-items:center;background:#000;transition:opacity 0.4s;}
 .thumb img{max-width:100%; max-height:100%; object-fit:contain;}
 .vid-wrap{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;justify-content:center;align-items:center;}
 video{width:100%;height:100%;object-fit:cover;background:#000;}
@@ -43,7 +43,8 @@ function init(){
     var hHtml=v.top ? '<div class="top-header">'+v.top+'</div>' : '';
     d.innerHTML=tHtml+pHtml+piHtml+cHtml+sHtml+hHtml; w.appendChild(d);
   }
-  swiper=new Swiper(".swiper",{direction:"horizontal", zoom:{maxRatio:3}, on:{slideChange:onSC}}); loadYT();
+  var zOpt = new Object(); zOpt["maxRatio"] = 4; zOpt["minRatio"] = 1; zOpt["toggle"] = true;
+  swiper=new Swiper(".swiper",{direction:"horizontal", zoom:zOpt, resistanceRatio:0, edgeSwipeDetection:true, on:{slideChange:onSC}}); loadYT();
 } function loadYT(){ var t=document.createElement("script"); t.src="https://www.youtube.com/iframe_api"; document.body.appendChild(t); }
 window.onYouTubeIframeAPIReady=function(){ for(var i=0;i<list.length;i++){ if(list[i].url && !list[i].isMp4){ players[i]=new YT.Player("p-"+i,{videoId:list[i].url,playerVars:{"controls":0,"modestbranding":1,"playsinline":1,"rel":0},events:{"onStateChange":onSTCH}}); } } };
 function onSTCH(e){ var i=parseInt(e.target.getIframe().id.split("-")[1]); if(e.data===1) hideUI(i); else if(e.data===2){ showPause(i); } else { hidePause(i); } }
