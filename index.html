@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=10,user-scalable=yes">
 <meta property="og:title" content="정숙남의원 의정보고서">
 <meta property="og:description" content="우리동네에는 정숙남이 있습니다.">
 <meta property="og:image" content="https://born520.github.io/jsn/images/og-image.jpg">
@@ -7,10 +7,10 @@
 <style>
 *{box-sizing:border-box;} body,html{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;}
 .swiper{width:100%;height:100%;max-width:56.25vh;margin:0 auto;background:#111;position:relative; overflow:hidden;}
-.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden; touch-action:none;}
-.swiper-zoom-container{width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
+.swiper-slide{width:100%;height:100%;position:relative;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden !important;}
+.swiper-zoom-container{width:100%;height:100%;display:flex;justify-content:center;align-items:center; overflow:visible;}
 .thumb{position:absolute;top:0;left:0;width:100%;height:100%;z-index:30;display:flex;justify-content:center;align-items:center;background:#000;transition:opacity 0.4s;}
-.thumb img{max-width:100%; max-height:100%; object-fit:contain;}
+.thumb img{max-width:100%; max-height:100%; object-fit:contain; transform-origin: center center;}
 .vid-wrap{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;justify-content:center;align-items:center;}
 video{width:100%;height:100%;object-fit:cover;background:#000;}
 .player-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:177.78vh;height:100vh;z-index:2;}
@@ -43,11 +43,11 @@ function init(){
     var hHtml=v.top ? '<div class="top-header">'+v.top+'</div>' : '';
     d.innerHTML=tHtml+pHtml+piHtml+cHtml+sHtml+hHtml; w.appendChild(d);
   }
-  var zOpt = new Object(); zOpt["maxRatio"] = 4; zOpt["minRatio"] = 1; zOpt["toggle"] = true;
+  var zOpt = new Object(); zOpt["maxRatio"] = 5; zOpt["minRatio"] = 1; zOpt["toggle"] = true;
   swiper=new Swiper(".swiper",{direction:"horizontal", zoom:zOpt, on:{
-    zoomChange: function(s, scale, imageEl, slideEl){
+    zoomChange: function(s, scale){
       if(scale > 1) { s.allowTouchMove = false; document.getElementById("gl").classList.add("hidden"); document.getElementById("gr").classList.add("hidden"); }
-      else { s.allowTouchMove = true; document.getElementById("gl").classList.remove("hidden"); document.getElementById("gr").classList.remove("hidden"); }
+      else { setTimeout(function(){ if(swiper.zoom.scale <= 1) { swiper.allowTouchMove = true; document.getElementById("gl").classList.remove("hidden"); document.getElementById("gr").classList.remove("hidden"); } }, 300); }
     },
     slideChange: onSC
   }}); loadYT();
